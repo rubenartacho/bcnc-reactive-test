@@ -1,5 +1,6 @@
-package com.bcnc.testreactive.controllers.dto;
+package com.bcnc.testreactive.controllers.dto.entities;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -15,7 +16,15 @@ public class PriceDTO {
     private long priceList;
     private long productId;
     private int priority;
+    private BigDecimal price;
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public long getPriceId() {
         return priceId;
@@ -76,13 +85,5 @@ public class PriceDTO {
     public PriceDTO() {
     }
 
-    public PriceDTO(long brandId, Date startDate, Date endDate, long priceList, long productId, int priority) {
-        this.brandId = brandId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.priceList = priceList;
-        this.productId = productId;
-        this.priority = priority;
-    }
 
 }
