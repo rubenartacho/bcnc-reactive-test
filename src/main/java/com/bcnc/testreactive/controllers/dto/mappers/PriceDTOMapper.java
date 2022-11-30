@@ -19,7 +19,7 @@ public class PriceDTOMapper implements DTOMapper<PriceDTO, Price>
         price.setPriceList(e.getPriceList());
         price.setProductId(e.getProductId());
         price.setPriority(e.getPriority());
-        price.setPrice(e.getPrice());
+        price.setItemPrice(e.getPrice());
 
         return price;
     }
@@ -35,7 +35,7 @@ public class PriceDTOMapper implements DTOMapper<PriceDTO, Price>
         priceDTO.setPriceList(e.getPriceList());
         priceDTO.setProductId(e.getProductId());
         priceDTO.setPriority(e.getPriority());
-        priceDTO.setPrice(e.getPrice());
+        priceDTO.setPrice(e.getItemPrice());
 
         return priceDTO;
     }

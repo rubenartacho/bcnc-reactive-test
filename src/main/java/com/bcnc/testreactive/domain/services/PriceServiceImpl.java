@@ -1,10 +1,11 @@
 package com.bcnc.testreactive.domain.services;
 
 import com.bcnc.testreactive.domain.entities.Price;
-import com.bcnc.testreactive.domain.ports.inbound.PriceService;
-import com.bcnc.testreactive.domain.ports.outbound.PriceRepository;
-import java.util.Date;
+import com.bcnc.testreactive.domain.utils.ComputeActualPriceFactory;
+import com.bcnc.testreactive.ports.outbound.PriceRepositoryAdapter;
+import java.time.OffsetDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -14,16 +15,21 @@ import reactor.core.publisher.Mono;
 @Service
 public class PriceServiceImpl implements PriceService {
     @Autowired
-    PriceRepository priceRepository;
+    PriceRepositoryAdapter priceRepositoryAdapter;
+
+    @Autowired
+    ComputeActualPriceFactory computeActualPriceFactory;
+
+    @Value("${actual.price.algorithm}")
+    private String computeActualPriceAlgorithm;
 
 
     @Override
-    public Mono<Price> getActualPriceForDate(Date applicationDate, long productId, long brandId) {
-        return priceRepository.getPricesForDate(applicationDate,productId,brandId).log()
-                .collectList()
-                .map(t->{
+    public Mono<Price> getActualPriceForDate(OffsetDateTime applicationDate, long productId, long brandId) {
 
-                    return new Price();
-                });
+        return priceRepositoryAdapter.getPricesForDate(applicationDate,productId,brandId)
+                .collectList()
+                .map(computeActualPriceFactory
+                        .getComputeActualPriceStrategy(computeActualPriceAlgorithm)::getActualPriceFromList);
     }
 }

@@ -1,7 +1,7 @@
 package com.bcnc.testreactive.repositories.dao.entities;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.OffsetDateTime;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -13,8 +13,8 @@ public class PriceDAO  {
     @Id
     private long priceId;
     private long brandId;
-    private Date startDate;
-    private Date endDate;
+    private OffsetDateTime startDate;
+    private OffsetDateTime endDate;
     private long priceList;
     private long productId;
     private int priority;
@@ -28,8 +28,6 @@ public class PriceDAO  {
         this.price = price;
     }
 
-    public PriceDAO() {
-    }
 
     public long getPriceId() {
         return priceId;
@@ -47,19 +45,19 @@ public class PriceDAO  {
         this.brandId = brandId;
     }
 
-    public Date getStartDate() {
+    public OffsetDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(OffsetDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public OffsetDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(OffsetDateTime endDate) {
         this.endDate = endDate;
     }
 

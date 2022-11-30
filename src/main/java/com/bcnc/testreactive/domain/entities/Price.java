@@ -2,7 +2,7 @@ package com.bcnc.testreactive.domain.entities;
 
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 /**
  * This is the domain class for storing Price information. It is used as part of the business logic inside the domain.
@@ -11,13 +11,14 @@ public class Price {
 
     private long priceId;
     private long brandId;
-    private Date startDate;
-    private Date endDate;
+    private OffsetDateTime startDate;
+    private OffsetDateTime endDate;
     private long priceList;
     private long productId;
     private int priority;
     //Using BigDecimal for currency as it has the required precision . It may have some performance impact though.
-    private BigDecimal price;
+    private BigDecimal itemPrice;
+
 
     public long getPriceId() {
         return priceId;
@@ -27,12 +28,12 @@ public class Price {
         this.priceId = priceId;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getItemPrice() {
+        return itemPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
     public long getBrandId() {
@@ -43,19 +44,19 @@ public class Price {
         this.brandId = brandId;
     }
 
-    public Date getStartDate() {
+    public OffsetDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(OffsetDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public OffsetDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(OffsetDateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -81,9 +82,6 @@ public class Price {
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public Price() {
     }
 
 

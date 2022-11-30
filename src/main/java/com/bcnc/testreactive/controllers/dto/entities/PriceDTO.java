@@ -1,7 +1,7 @@
 package com.bcnc.testreactive.controllers.dto.entities;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 /**
  * This is the Price Data Transmission Object. Is used to decouple Data Transmission entities from the core domain entities.
@@ -11,8 +11,8 @@ import java.util.Date;
 public class PriceDTO {
     private long priceId;
     private long brandId;
-    private Date startDate;
-    private Date endDate;
+    private OffsetDateTime startDate;
+    private OffsetDateTime endDate;
     private long priceList;
     private long productId;
     private int priority;
@@ -42,19 +42,19 @@ public class PriceDTO {
         this.brandId = brandId;
     }
 
-    public Date getStartDate() {
+    public OffsetDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(OffsetDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public OffsetDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(OffsetDateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -80,9 +80,6 @@ public class PriceDTO {
 
     public void setPriority(int priority) {
         this.priority = priority;
-    }
-
-    public PriceDTO() {
     }
 
 
