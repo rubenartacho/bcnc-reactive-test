@@ -1,5 +1,8 @@
 package com.bcnc.testreactive.controllers.dto.entities;
 
+import com.bcnc.testreactive.controllers.utils.View.Detailed;
+import com.bcnc.testreactive.controllers.utils.View.Public;
+import com.fasterxml.jackson.annotation.JsonView;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
@@ -9,13 +12,28 @@ import java.time.OffsetDateTime;
  * entities are used for data transmission.
  */
 public class PriceDTO {
+    @JsonView(Detailed.class)
     private long priceId;
+
+    @JsonView(Public.class)
     private long brandId;
+
+    @JsonView(Public.class)
     private OffsetDateTime startDate;
+
+    @JsonView(Public.class)
     private OffsetDateTime endDate;
+
+    @JsonView(Public.class)
     private long priceList;
+
+    @JsonView(Public.class)
     private long productId;
+
+    @JsonView(Detailed.class)
     private int priority;
+
+    @JsonView(Public.class)
     private BigDecimal price;
 
     public BigDecimal getPrice() {
@@ -83,4 +101,17 @@ public class PriceDTO {
     }
 
 
+    @Override
+    public String toString() {
+        return "PriceDTO{" +
+                "priceId=" + priceId +
+                ", brandId=" + brandId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", priceList=" + priceList +
+                ", productId=" + productId +
+                ", priority=" + priority +
+                ", price=" + price +
+                '}';
+    }
 }

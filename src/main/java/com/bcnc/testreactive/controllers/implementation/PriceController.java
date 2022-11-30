@@ -1,7 +1,9 @@
 package com.bcnc.testreactive.controllers.implementation;
 
 import com.bcnc.testreactive.controllers.dto.entities.PriceDTO;
+import com.bcnc.testreactive.controllers.utils.View.Public;
 import com.bcnc.testreactive.ports.inbound.PriceServiceAdapter;
+import com.fasterxml.jackson.annotation.JsonView;
 import java.time.OffsetDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +24,10 @@ public class PriceController {
     Logger logger = LoggerFactory.getLogger(PriceController.class);
 
     @GetMapping("/brand/{brandId}/product/{productId}/appDate/{applicationDateS}")
+    @JsonView(Public.class)
     public Mono<PriceDTO> getActualPriceForDate(@PathVariable String applicationDateS
             ,@PathVariable long productId,@PathVariable long brandId){
-
+        logger.debug("GET query at the endpoint");
         OffsetDateTime applicationDate = OffsetDateTime.parse(applicationDateS);
         return  priceServiceAdapter.getActualPriceForDate(applicationDate, productId, brandId);
     }

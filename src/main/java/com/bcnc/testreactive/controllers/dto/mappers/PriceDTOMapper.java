@@ -4,6 +4,9 @@ import com.bcnc.testreactive.controllers.dto.entities.PriceDTO;
 import com.bcnc.testreactive.domain.entities.Price;
 import org.springframework.stereotype.Component;
 
+/**
+ * DTO to DOM mapping implementation. Made manually as it usually has better performance.
+ */
 @Component
 public class PriceDTOMapper implements DTOMapper<PriceDTO, Price>
 {

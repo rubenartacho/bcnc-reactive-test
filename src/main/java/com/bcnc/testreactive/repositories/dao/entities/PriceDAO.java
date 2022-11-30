@@ -3,6 +3,7 @@ package com.bcnc.testreactive.repositories.dao.entities;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 /**
  * This is the Price Data Access Object. Is used to decouple Data access entities from the core domain entities.
@@ -12,12 +13,26 @@ import org.springframework.data.annotation.Id;
 public class PriceDAO  {
     @Id
     private long priceId;
+
+    @Column("brandID")
     private long brandId;
+
+    @Column("startDate")
     private OffsetDateTime startDate;
+
+    @Column("endDate")
     private OffsetDateTime endDate;
+
+    @Column("priceList")
     private long priceList;
+
+    @Column("productId")
     private long productId;
+
+    @Column("priority")
     private int priority;
+
+    @Column("price")
     private BigDecimal price;
 
     public BigDecimal getPrice() {
@@ -27,7 +42,6 @@ public class PriceDAO  {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
 
     public long getPriceId() {
         return priceId;
@@ -85,5 +99,18 @@ public class PriceDAO  {
         this.priority = priority;
     }
 
+    @Override
+    public String toString() {
+        return "PriceDAO{" +
+                "priceId=" + priceId +
+                ", brandId=" + brandId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", priceList=" + priceList +
+                ", productId=" + productId +
+                ", priority=" + priority +
+                ", price=" + price +
+                '}';
+    }
 
 }

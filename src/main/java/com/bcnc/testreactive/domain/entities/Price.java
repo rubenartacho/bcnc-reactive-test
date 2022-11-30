@@ -85,4 +85,17 @@ public class Price {
     }
 
 
+    @Override
+    public String toString() {
+        return "Price{" +
+                "priceId=" + priceId +
+                ", brandId=" + brandId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", priceList=" + priceList +
+                ", productId=" + productId +
+                ", priority=" + priority +
+                ", itemPrice=" + itemPrice.toPlainString() +
+                '}';
+    }
 }

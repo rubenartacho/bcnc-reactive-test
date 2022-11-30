@@ -1,8 +1,6 @@
 package com.bcnc.testreactive.domain.utils;
 
 import com.bcnc.testreactive.domain.entities.Price;
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
@@ -14,15 +12,16 @@ public class ComputeActualPriceByPriority implements ComputeActualPriceStrategy{
 
     @Override
     public Price getActualPriceFromList(List<Price> prices) {
+
         Price price = new Price();
-        price.setPriceId(0);
-        price.setBrandId(0);
-        price.setStartDate(OffsetDateTime.now());
-        price.setEndDate(OffsetDateTime.now());
-        price.setPriceList(0);
-        price.setProductId(0);
-        price.setPriority(0);
-        price.setItemPrice(new BigDecimal(0));
+        int maxPriority = -1;
+        for ( Price p : prices ) {
+            if(p.getPriority()> maxPriority){
+                maxPriority = p.getPriority();
+                price = p;
+            }
+        }
+
         return price;
     }
 }
