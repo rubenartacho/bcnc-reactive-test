@@ -1,7 +1,7 @@
-# BCNC Software developer test asignment.
-##Overview
+# BCNC Software developer test asignment.#
+##Overview##
 Test project for Lead Java developer position application at BCNC.
-##How to run
+##How to run##
 
 
 ##Design decisions
