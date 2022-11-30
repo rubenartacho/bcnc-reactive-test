@@ -95,7 +95,7 @@ public class Price {
                 ", priceList=" + priceList +
                 ", productId=" + productId +
                 ", priority=" + priority +
-                ", itemPrice=" + itemPrice.toPlainString() +
+                ", itemPrice=" + itemPrice +
                 '}';
     }
 }
