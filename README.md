@@ -1,31 +1,31 @@
 # BCNC Software developer test asignment.
 
-##Overview
+## Overview
 Test project for Lead Java developer position application at BCNC.
 
-##How to run
+## How to run
 
 
-##Design decisions
+## Design decisions
 
-###Hexagonal Architecture
+### Hexagonal Architecture
 
-####Domain isolation
+#### Domain isolation
 
-####Adapters used
+#### Adapters used
 
-####DAO and DTO usage
+#### DAO and DTO usage
 
-###Reactive programming
+### Reactive programming
 
-####Why reactive?
+#### Why reactive?
 
-####Need more info?
+#### Need more info?
 
-###Performance considerations
+### Performance considerations
 
-###Patterns used
+### Patterns used
 
-###Technologies
+### Technologies
 
-##More Info
+## More Info
