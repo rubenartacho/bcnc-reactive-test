@@ -17,8 +17,8 @@ public class PriceServiceAdapterImpl implements PriceServiceAdapter{
     PriceDTOMapper priceDTOMapper;
 
     @Override
-    public Mono<PriceDTO> getActualPriceForDate(OffsetDateTime applicationDate, long productId, long brandId) {
-        return priceService.getActualPriceForDate(applicationDate, productId, brandId)
+    public Mono<PriceDTO> getActualPriceForDate(String applicationDate, long productId, long brandId) {
+        return priceService.getActualPriceForDate(OffsetDateTime.parse(applicationDate), productId, brandId)
                 .map(priceDTOMapper::getFromDOM);
     }
 }

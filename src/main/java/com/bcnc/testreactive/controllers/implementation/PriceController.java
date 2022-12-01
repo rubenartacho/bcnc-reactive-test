@@ -23,12 +23,12 @@ public class PriceController {
     PriceServiceAdapter priceServiceAdapter;
     Logger logger = LoggerFactory.getLogger(PriceController.class);
 
-    @GetMapping("/brand/{brandId}/product/{productId}/appDate/{applicationDateS}")
+    @GetMapping("/brand/{brandId}/product/{productId}/appDate/{applicationDate}")
     @JsonView(Public.class)
-    public Mono<PriceDTO> getActualPriceForDate(@PathVariable String applicationDateS
-            ,@PathVariable long productId,@PathVariable long brandId){
+    public Mono<PriceDTO> getActualPriceForDate(@PathVariable String applicationDate,@PathVariable long productId,@PathVariable long brandId){
+
         logger.debug("GET query at the endpoint");
-        OffsetDateTime applicationDate = OffsetDateTime.parse(applicationDateS);
+
         return  priceServiceAdapter.getActualPriceForDate(applicationDate, productId, brandId);
     }
 
