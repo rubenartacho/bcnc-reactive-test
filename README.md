@@ -7,21 +7,21 @@ Test project for Lead Java developer position application at BCNC.
 [Maven](https://maven.apache.org/) is needed to build the application. 
 ### Run the application
 To run the application from the command line go to the main folder and type.
-```sh
+```shell
  mvn spring-boot:run
  ```
 ### Compile the application
 To  compile the application from the command line go to the main folder and type.
-```sh
+```shell
  mvn package
  ```
 This will generate a .jar file inside ./target folder that can be run simply by typing the following.
-```sh
+```shell
  java -jar FILENAME.jar
  ```
 ### Create a Docker image
 To create a Docker image go to the main folder and type.
-```sh
+```shell
  mvn spring-boot:build-image
  ```
 
@@ -33,8 +33,72 @@ By using this architecture the domain logic remains decoupled from its clients a
 Changes in the clients and in the data backend can be performed as long as a new inbound or outbound ports are implemented.
 
 #### Domain isolation
+Domain isolation and decoupling has been achieved by the following means:
+* Using the Adapter pattern between Controllers, Services and Repositories. This way it's easy to change clients or data backends if needed.
+```java
+/**
+ * This is the inbound port. This interface acts as an adapter for accessing the business logic.
+ */
+public interface PriceServiceAdapter {
+    Mono<PriceDTO> getActualPriceForDate(String applicationDate, long productId, long brandId);
 
-#### Adapters used
+}
+```
+```java
+/**
+ * This class acts as an Adapter for accessing Price's business logic. It handles conversion between DTO's and domain entities and decouples
+ * business logic from it's clients
+ */
+@Component
+public class PriceServiceAdapterImpl implements PriceServiceAdapter{
+    @Autowired
+    PriceService priceService;
+
+    @Autowired
+    PriceDTOMapper priceDTOMapper;
+
+    @Override
+    public Mono<PriceDTO> getActualPriceForDate(String applicationDate, long productId, long brandId) {
+        return priceService.getActualPriceForDate(OffsetDateTime.parse(applicationDate), productId, brandId)
+                .map(priceDTOMapper::getFromDOM);
+    }
+}
+
+```
+```java
+/**
+ * This is the outbound port. This interface acts as an adapter for accessing the data backend.
+ */
+public interface PriceRepositoryAdapter {
+
+    Flux<Price> getPricesForDate(OffsetDateTime applicationDate, long productId,long brandId);
+
+}
+
+```
+```java
+/**
+ * This class acts as an Adapter for accessing Price's data backend. It handles conversion between DAO's and domain entities and decouples data access
+ * from business logic.
+ */
+@Repository
+public class PriceRepositoryAdapterImpl implements PriceRepositoryAdapter
+{
+    @Autowired
+    ReactivePriceRepository reactivePriceRepository;
+
+    @Autowired
+    PriceDAOMapper priceDAOMapper;
+
+    @Override
+    public Flux<Price> getPricesForDate(OffsetDateTime applicationDate, long productId, long brandId) {
+        return reactivePriceRepository.findPricesForDate(applicationDate,productId,brandId)
+                .map(priceDAOMapper::getFromDAO);
+
+    }
+}
+```
+* Using DAO and DTO entities so domain entities remain inside the domain.
 
 ### Reactive programming
 This application uses the Reactive Programming paradigm.
