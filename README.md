@@ -13,16 +13,16 @@ To run the application from the command line go to the main folder and type.
 ### Compile the application
 To  compile the application from the command line go to the main folder and type.
 ```sh
- $mvn package
+ mvn package
  ```
 This will generate a .jar file inside ./target folder that can be run simply by typing the following.
 ```sh
- $java -jar FILENAME.jar
+ java -jar FILENAME.jar
  ```
 ### Create a Docker image
 To create a Docker image go to the main folder and type.
 ```sh
- $mvn spring-boot:build-image
+ mvn spring-boot:build-image
  ```
 
 ## Design decisions
