@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * This implementation will pick the highest priority price among all prices from a given List
+ * It's also the default implementation.
  */
 @Component
 public class ComputeActualPriceByPriority implements ComputeActualPriceStrategy{

@@ -21,8 +21,8 @@ public class ComputeActualPriceFactory {
 
         ComputeActualPriceStrategy computeActualPriceStrategy = computeActualPriceStrategyMap.get(type);
         if(computeActualPriceStrategy == null){
-            logger.error("Unable to find ComputeActualPriceStrategy type : {}", type);
-            throw new IllegalArgumentException();
+            logger.warn("Unable to find ComputeActualPriceStrategy type : {} falling back to default computeActualPriceByPriority", type);
+            return computeActualPriceStrategyMap.get("computeActualPriceByPriority");
         }
         return computeActualPriceStrategy;
     }
