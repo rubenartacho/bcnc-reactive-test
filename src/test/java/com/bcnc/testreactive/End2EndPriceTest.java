@@ -15,7 +15,7 @@ class End2EndPriceTest {
 	WebTestClient webTestClient;
 
 	@Test
-	void shouldReturnTheRightPrice_Test1() throws Exception {
+	void shouldReturnTheRightPrice_Test1() {
 		webTestClient.get()
 				.uri("/brand/1/product/35455/appDate/2020-06-14T10:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
@@ -26,7 +26,7 @@ class End2EndPriceTest {
 	}
 
 	@Test
-	void shouldReturnTheRightPrice_Test2() throws Exception {
+	void shouldReturnTheRightPrice_Test2()  {
 		webTestClient.get()
 				.uri("/brand/1/product/35455/appDate/2020-06-14T16:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
@@ -37,7 +37,7 @@ class End2EndPriceTest {
 	}
 
 	@Test
-	void shouldReturnTheRightPrice_Test3() throws Exception {
+	void shouldReturnTheRightPrice_Test3() {
 		webTestClient.get()
 				.uri("/brand/1/product/35455/appDate/2020-06-14T21:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
@@ -48,7 +48,7 @@ class End2EndPriceTest {
 	}
 
 	@Test
-	void shouldReturnTheRightPrice_Test4() throws Exception {
+	void shouldReturnTheRightPrice_Test4()  {
 		webTestClient.get()
 				.uri("/brand/1/product/35455/appDate/2020-06-15T10:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ class End2EndPriceTest {
 	}
 
 	@Test
-	void shouldReturnTheRightPrice_Test5() throws Exception {
+	void shouldReturnTheRightPrice_Test5()  {
 		webTestClient.get()
 				.uri("/brand/1/product/35455/appDate/2020-06-16T21:00:00.000Z")
 		.accept(MediaType.APPLICATION_JSON)
@@ -70,7 +70,7 @@ class End2EndPriceTest {
 	}
 
 	@Test
-	void shouldReturnNullPrice_WhenDateOutOfRange() throws Exception{
+	void shouldReturnNullPrice_WhenDateOutOfRange() {
 		webTestClient.get()
 				.uri("/brand/1/product/35455/appDate/2022-06-16T21:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
@@ -80,7 +80,7 @@ class End2EndPriceTest {
 				.isEqualTo("{\"brandId\":0,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
 	}
 	@Test
-	void shouldReturnNullPrice_WhenNoProductId() throws Exception{
+	void shouldReturnNullPrice_WhenNoProductId() {
 		webTestClient.get()
 				.uri("/brand/1/product/3545567/appDate/2020-06-16T21:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class End2EndPriceTest {
 				.isEqualTo("{\"brandId\":0,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
 	}
 	@Test
-	void shouldReturnNullPrice_WhenNoBrandId() throws Exception{
+	void shouldReturnNullPrice_WhenNoBrandId() {
 		webTestClient.get()
 				.uri("/brand/200/product/35455/appDate/2020-06-16T21:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
@@ -100,11 +100,19 @@ class End2EndPriceTest {
 				.isEqualTo("{\"brandId\":0,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
 	}
 	@Test
-	void shouldReturnNotFound_WhenMalformedURL() throws Exception{
+	void shouldReturnNotFound_WhenMalformedURL() {
 		webTestClient.get()
 				.uri("/brand/200/prodct/35455/appDate/2020-06-16T21:00:00.000Z")
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isNotFound();
+	}
+	@Test
+	void shouldReturn5xx_WhenMalformedDate() {
+		webTestClient.get()
+				.uri("/brand/1/product/35455/appDate/2020-06-1")
+				.accept(MediaType.APPLICATION_JSON)
+				.exchange()
+				.expectStatus().is5xxServerError();
 	}
 }
