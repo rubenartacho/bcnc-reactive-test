@@ -26,7 +26,18 @@ To create a Docker image go to the main folder and type.
  ```
 
 ## Design decisions
-
+* The application implements Hexagonal Architecture
+* It's coded using the Reactive programing paradigm. 
+* The API uses PathVariables for parameter input
+```
+http://host:port/brand/{brandId}/product/{productId}/appDate/{applicationDate}
+```
+* All dates are ISO format ex. 2020-06-14T21:00:00.000Z 
+* Endpoints return application/json bodies.
+* If no Price can be found will return a null object .
+```json
+{"brandId":0,"startDate":null,"endDate":null,"priceList":0,"productId":0,"price":null}
+```
 ### Hexagonal Architecture
 This application has been implemented following the Hexagonal Architecture pattern. 
 By using this architecture the domain logic remains decoupled from its clients and its data backend.
@@ -129,7 +140,7 @@ This application uses the Reactive Programming paradigm.
 
 
 ### Other Patterns used
-* The Actual Price Computing algorithm has been implemented using a combination of Factory and Strategy patters. This way the behaviour of the algorithm can be changed at any time allowing for great flexibility.
+* The Actual Price Computing algorithm has been implemented using a combination of Factory and Strategy patterns. This way the behaviour of the algorithm can be changed at any time allowing for great flexibility.
 ```java
 /**
  * This is the interface for a Strategy pattern. This will enable the runtime exchanging of the actual price computing algorithm.

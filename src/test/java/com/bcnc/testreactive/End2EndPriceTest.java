@@ -97,7 +97,7 @@ class End2EndPriceTest {
 				.exchange()
 				.expectStatus().isOk()
 				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":0,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
+				.isEqualTo("{\"brandId\":1,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
 	}
 	@Test
 	void shouldReturnNotFound_WhenMalformedURL() {
