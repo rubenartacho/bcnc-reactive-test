@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+/**
+ * This class acts as an Adapter for accessing Price's business logic. It handles conversion between DTO's and domain entities and decouples
+ * business logic from it's clients
+ */
 @Component
 public class PriceServiceAdapterImpl implements PriceServiceAdapter{
     @Autowired

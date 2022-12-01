@@ -20,6 +20,7 @@ public class PriceServiceImpl implements PriceService {
     @Autowired
     ComputeActualPriceFactory computeActualPriceFactory;
 
+    //Injecting a property so the algorithm  can be changed if needed
     @Value("${actual.price.algorithm}")
     private String computeActualPriceAlgorithm;
 
