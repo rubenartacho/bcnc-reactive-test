@@ -196,7 +196,10 @@ public class ComputeActualPriceByPriority implements ComputeActualPriceStrategy{
     }
 }
 ```
-
+* The algorithm can be selected by the following property in application.properties
+```properties
+actual.price.algorithm=computeActualPriceByPriority
+```
 ### Performance considerations
 * Used Reactive Programming Paradigm (discussed before).
 * Hardcoded DAO and DTO mappers instead of using a mapping library as manual implementation tends to perform better (no reflection, no framework overhead, etc.). Some mapping frameworks perform close to manual implementation (ex. Mapstruct). 
