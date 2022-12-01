@@ -128,9 +128,78 @@ This application uses the Reactive Programming paradigm.
 * Spring WebFlux is an annotation-based web framework built on [Project Reactor](https://projectreactor.io/)  and provides two main types called Flux and Mono.
 
 
-### Patterns used
+### Other Patterns used
+* The Actual Price Computing algorithm has been implemented using a combination of Factory and Strategy patters. This way the behaviour of the algorithm can be changed at any time allowing for great flexibility.
+```java
+/**
+ * This is the interface for a Strategy pattern. This will enable the runtime exchanging of the actual price computing algorithm.
+ */
+public interface ComputeActualPriceStrategy {
 
-### Technologies
-[Project Reactor]()
-## More Info
+    /**
+     * Will get the actual Price from a given List
+     * @param prices The Prices list
+     * @return The actual Price
+     */
+    Price getActualPriceFromList(List<Price> prices);
+
+}
+```
+
+```java
+/**
+ * This factory makes it easy to get a concrete ComputeActualPrice implementation at runtime.
+ */
+@Component
+public class ComputeActualPriceFactory {
+
+    Logger logger = LoggerFactory.getLogger(ComputeActualPriceFactory.class);
+
+    @Autowired
+    Map<String,ComputeActualPriceStrategy> computeActualPriceStrategyMap;
+
+    public ComputeActualPriceStrategy getComputeActualPriceStrategy(String type){
+
+        ComputeActualPriceStrategy computeActualPriceStrategy = computeActualPriceStrategyMap.get(type);
+        if(computeActualPriceStrategy == null){
+            logger.warn("Unable to find ComputeActualPriceStrategy type : {} falling back to default computeActualPriceByPriority", type);
+            return computeActualPriceStrategyMap.get("computeActualPriceByPriority");
+        }
+        return computeActualPriceStrategy;
+    }
+
+}
+
+```
+
+```java
+/**
+ * This implementation will pick the highest priority price among all prices from a given List
+ * It's also the default implementation.
+ */
+@Component
+public class ComputeActualPriceByPriority implements ComputeActualPriceStrategy{
+
+    @Override
+    public Price getActualPriceFromList(List<Price> prices) {
+
+        Price price = new Price();
+        int maxPriority = -1;
+        for ( Price p : prices ) {
+            if(p.getPriority()> maxPriority){
+                maxPriority = p.getPriority();
+                price = p;
+            }
+        }
+
+        return price;
+    }
+}
+```
+
+### Performance considerations
+* Used Reactive Programming Paradigm (discussed before).
+* Hardcoded DAO and DTO mappers instead of using a mapping library as manual implementation tends to perform better (no reflection, no framework overhead, etc.). Some mapping frameworks perform close to manual implementation (ex. Mapstruct). 
+
+### More Info
 Feel free to check the comments inside the code for more info.
