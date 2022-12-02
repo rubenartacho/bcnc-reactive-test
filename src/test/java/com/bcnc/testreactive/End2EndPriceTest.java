@@ -1,15 +1,11 @@
 package com.bcnc.testreactive;
 
-import com.bcnc.testreactive.controllers.dto.entities.PriceDTO;
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.util.Assert;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
