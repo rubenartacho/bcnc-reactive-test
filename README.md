@@ -10,6 +10,11 @@ To run the application from the command line go to the main folder and type.
 ```shell
  mvn spring-boot:run
  ```
+### Run the application tests
+To run the application tests from the command line go to the main folder and type.
+```shell
+ mvn test
+ ```
 ### Compile the application
 To  compile the application from the command line go to the main folder and type.
 ```shell
