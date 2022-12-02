@@ -1,11 +1,15 @@
 package com.bcnc.testreactive;
 
+import com.bcnc.testreactive.controllers.dto.entities.PriceDTO;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.util.Assert;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
@@ -21,9 +25,16 @@ class End2EndPriceTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":1,\"startDate\":\"2020-06-14T00:00:00Z\",\"endDate\":\"2020-12-31T23:59:59Z\",\"priceList\":1,\"productId\":35455,\"price\":35.50}");
-	}
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(1)
+				.jsonPath("priceList").isEqualTo(1)
+				.jsonPath("productId").isEqualTo(35455)
+				.jsonPath("price").isEqualTo(35.50)
+				.jsonPath("currency").isEqualTo("EUR")
+				.jsonPath("startDate").isEqualTo("2020-06-14T00:00:00Z")
+				.jsonPath("endDate").isEqualTo("2020-12-31T23:59:59Z");
+
+}
 
 	@Test
 	void shouldReturnTheRightPrice_Test2()  {
@@ -32,9 +43,15 @@ class End2EndPriceTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":1,\"startDate\":\"2020-06-14T15:00:00Z\",\"endDate\":\"2020-06-14T18:30:00Z\",\"priceList\":2,\"productId\":35455,\"price\":25.45}");
-	}
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(1)
+				.jsonPath("priceList").isEqualTo(2)
+				.jsonPath("productId").isEqualTo(35455)
+				.jsonPath("price").isEqualTo(25.45)
+				.jsonPath("currency").isEqualTo("EUR")
+				.jsonPath("startDate").isEqualTo("2020-06-14T15:00:00Z")
+				.jsonPath("endDate").isEqualTo("2020-06-14T18:30:00Z");
+}
 
 	@Test
 	void shouldReturnTheRightPrice_Test3() {
@@ -43,9 +60,15 @@ class End2EndPriceTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":1,\"startDate\":\"2020-06-14T00:00:00Z\",\"endDate\":\"2020-12-31T23:59:59Z\",\"priceList\":1,\"productId\":35455,\"price\":35.50}");
-	}
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(1)
+				.jsonPath("priceList").isEqualTo(1)
+				.jsonPath("productId").isEqualTo(35455)
+				.jsonPath("price").isEqualTo(35.50)
+				.jsonPath("currency").isEqualTo("EUR")
+				.jsonPath("startDate").isEqualTo("2020-06-14T00:00:00Z")
+				.jsonPath("endDate").isEqualTo("2020-12-31T23:59:59Z");
+}
 
 	@Test
 	void shouldReturnTheRightPrice_Test4()  {
@@ -54,20 +77,33 @@ class End2EndPriceTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":1,\"startDate\":\"2020-06-15T00:00:00Z\",\"endDate\":\"2020-06-15T11:00:00Z\",\"priceList\":3,\"productId\":35455,\"price\":30.50}");
-	}
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(1)
+				.jsonPath("priceList").isEqualTo(3)
+				.jsonPath("productId").isEqualTo(35455)
+				.jsonPath("price").isEqualTo(30.50)
+				.jsonPath("currency").isEqualTo("EUR")
+				.jsonPath("startDate").isEqualTo("2020-06-15T00:00:00Z")
+				.jsonPath("endDate").isEqualTo("2020-06-15T11:00:00Z");
+}
 
 	@Test
 	void shouldReturnTheRightPrice_Test5()  {
 		webTestClient.get()
 				.uri("/brand/1/product/35455/appDate/2020-06-16T21:00:00.000Z")
-		.accept(MediaType.APPLICATION_JSON)
-		.exchange()
-		.expectStatus().isOk()
-		.expectBody(String.class)
-				.isEqualTo("{\"brandId\":1,\"startDate\":\"2020-06-15T16:00:00Z\",\"endDate\":\"2020-12-31T23:59:59Z\",\"priceList\":4,\"productId\":35455,\"price\":38.95}");
-	}
+				.accept(MediaType.APPLICATION_JSON)
+				.exchange()
+				.expectStatus().isOk()
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(1)
+				.jsonPath("priceList").isEqualTo(4)
+				.jsonPath("productId").isEqualTo(35455)
+				.jsonPath("price").isEqualTo(38.95)
+				.jsonPath("currency").isEqualTo("EUR")
+				.jsonPath("startDate").isEqualTo("2020-06-15T16:00:00Z")
+				.jsonPath("endDate").isEqualTo("2020-12-31T23:59:59Z");
+
+}
 
 	@Test
 	void shouldReturnNullPrice_WhenDateOutOfRange() {
@@ -76,8 +112,14 @@ class End2EndPriceTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":0,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(0)
+				.jsonPath("priceList").isEqualTo(0)
+				.jsonPath("productId").isEqualTo(0)
+				.jsonPath("price").isEqualTo(null)
+				.jsonPath("currency").isEqualTo(null)
+				.jsonPath("startDate").isEqualTo(null)
+				.jsonPath("endDate").isEqualTo(null);
 	}
 	@Test
 	void shouldReturnNullPrice_WhenNoProductId() {
@@ -86,8 +128,14 @@ class End2EndPriceTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":0,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(0)
+				.jsonPath("priceList").isEqualTo(0)
+				.jsonPath("productId").isEqualTo(0)
+				.jsonPath("price").isEqualTo(null)
+				.jsonPath("currency").isEqualTo(null)
+				.jsonPath("startDate").isEqualTo(null)
+				.jsonPath("endDate").isEqualTo(null);
 	}
 	@Test
 	void shouldReturnNullPrice_WhenNoBrandId() {
@@ -96,8 +144,14 @@ class End2EndPriceTest {
 				.accept(MediaType.APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(String.class)
-				.isEqualTo("{\"brandId\":0,\"startDate\":null,\"endDate\":null,\"priceList\":0,\"productId\":0,\"price\":null}");
+				.expectBody()
+				.jsonPath("brandId").isEqualTo(0)
+				.jsonPath("priceList").isEqualTo(0)
+				.jsonPath("productId").isEqualTo(0)
+				.jsonPath("price").isEqualTo(null)
+				.jsonPath("currency").isEqualTo(null)
+				.jsonPath("startDate").isEqualTo(null)
+				.jsonPath("endDate").isEqualTo(null);
 	}
 	@Test
 	void shouldReturnNotFound_WhenMalformedURL() {

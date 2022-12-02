@@ -18,7 +18,15 @@ public class Price {
     private int priority;
     //Using BigDecimal for currency as it has the required precision . It may have some performance impact though.
     private BigDecimal itemPrice;
+    private String currency;
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
     public long getPriceId() {
         return priceId;

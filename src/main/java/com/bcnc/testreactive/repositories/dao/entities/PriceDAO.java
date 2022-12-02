@@ -38,6 +38,17 @@ public class PriceDAO  {
     @Column("price")
     private BigDecimal price;
 
+    @Column("currency")
+    private String currency;
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }

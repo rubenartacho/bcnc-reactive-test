@@ -44,7 +44,7 @@ http://host:port/brand/{brandId}/product/{productId}/appDate/{applicationDate}
 {"brandId":0,"startDate":null,"endDate":null,"priceList":0,"productId":0,"price":null}
 ```
 * Using R2DBC (Reactive DB non blocking, event driven IO) instead of JPA/Hibernate as currently Hibernate uses blocking IO and will negate the reactive programming benefits heavily impacting performance.
-
+* Currency is suposed to be in Alpha-3 format.
 ### Hexagonal Architecture
 This application has been implemented following the Hexagonal Architecture pattern. 
 By using this architecture the domain logic remains decoupled from its clients and its data backend.

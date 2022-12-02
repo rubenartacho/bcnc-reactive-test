@@ -23,6 +23,7 @@ public class PriceDAOMapper implements  DAOMapper<PriceDAO, Price>{
        price.setProductId(e.getProductId());
        price.setPriority(e.getPriority());
        price.setItemPrice(e.getPrice());
+       price.setCurrency(e.getCurrency());
 
        return price;
     }
@@ -38,6 +39,7 @@ public class PriceDAOMapper implements  DAOMapper<PriceDAO, Price>{
         priceDAO.setProductId(e.getProductId());
         priceDAO.setPriority(e.getPriority());
         priceDAO.setPrice(e.getItemPrice());
+        priceDAO.setCurrency(e.getCurrency());
 
         return priceDAO;
     }

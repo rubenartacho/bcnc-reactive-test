@@ -36,6 +36,17 @@ public class PriceDTO {
     @JsonView(Public.class)
     private BigDecimal price;
 
+    @JsonView(Public.class)
+    private String currency;
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -114,4 +125,5 @@ public class PriceDTO {
                 ", price=" + price +
                 '}';
     }
+
 }
