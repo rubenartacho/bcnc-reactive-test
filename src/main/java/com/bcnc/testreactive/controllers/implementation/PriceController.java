@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 /**
- * This is the main REST API endpoint for prices. It  uses the inbound port PriceService to access the business logic.
+ * This is the main REST API endpoint for prices. It  uses the inbound port PriceServiceAdapter to access the business logic.
  */
 @RestController
 public class PriceController {
