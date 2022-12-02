@@ -9,7 +9,10 @@ import org.springframework.data.relational.core.mapping.Column;
  * This is the Price Data Access Object. Is used to decouple Data access entities from the core domain entities.
  * It introduces some conversion overhead but in Hexagonal Architecture is necessary to keep domain entities strictly inside the domain so alternate
  * entities are used for data access.
+ * Using R2DBC (Reactive DB non blocking, event driven IO) instead of JPA/Hibernate as currently Hibernate uses blocking IO and will degrade
+ * reactive performance. So no @Entity .
  */
+
 public class PriceDAO  {
     @Id
     private long priceId;

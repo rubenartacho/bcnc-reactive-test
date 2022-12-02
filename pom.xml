@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.bcnc</groupId>
 	<artifactId>testreactive</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>testreactive</name>
 	<description>Test project for Lead Java developer position application at BCNC.</description>
 	<properties>
