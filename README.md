@@ -1,8 +1,7 @@
-# BCNC Software developer test asignment.
+# Spring Boot Hexagonal Architecture Reactive Showcase
 
 ## Overview
-Test project for Lead Java developer position application at BCNC.
-
+Showcase project using Spring Boot, Reactive Programming and Hexagonal Architecture.
 ## How to run
 [Maven](https://maven.apache.org/) is needed to build the application. 
 ### Run the application
